@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lista de Mapas</title>
+  </head>
+  <body>
+    <h1>Lista de Mapas</h1>
+    <a href="{% url 'criar_mapa' %}">Criar Novo Mapa</a>
+    <ul>
+      {% for mapa in mapas %}
+      <li>
+        {{ mapa.nome }}
+        <a href="{% url 'atualizar_mapa' mapa.pk %}">Editar</a>
+        <a href="{% url 'deletar_mapa' mapa.pk %}">Deletar</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

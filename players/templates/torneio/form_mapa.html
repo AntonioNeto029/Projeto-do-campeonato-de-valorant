@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulário de Mapa</title>
+  </head>
+  <body>
+    <h1>{{ form.instance.pk|yesno:"Atualizar Mapa,Criar Novo Mapa" }}</h1>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Salvar</button>
+    </form>
+    <a href="{% url 'lista_mapas' %}">Voltar para a lista de mapas</a>
+  </body>
+</html>

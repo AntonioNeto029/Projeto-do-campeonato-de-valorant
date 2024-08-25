@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulário de Jogador</title>
+  </head>
+  <body>
+    <h1>{{ form.instance.pk|yesno:"Atualizar Jogador,Criar Novo Jogador" }}</h1>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Salvar</button>
+    </form>
+    <a href="{% url 'lista_jogadores' %}">Voltar para a lista de jogadores</a>
+  </body>
+</html>

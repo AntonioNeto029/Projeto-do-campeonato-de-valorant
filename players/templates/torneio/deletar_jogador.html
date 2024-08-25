@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Deletar Jogador</title>
+  </head>
+  <body>
+    <h1>Deletar Jogador</h1>
+    <p>Tem certeza que deseja deletar {{ jogador.nome }}?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit">Sim, deletar</button>
+    </form>
+    <a href="{% url 'lista_jogadores' %}">Cancelar</a>
+  </body>
+</html>

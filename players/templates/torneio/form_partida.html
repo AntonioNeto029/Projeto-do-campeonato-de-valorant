@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulário de Partida</title>
+  </head>
+  <body>
+    <h1>{{ form.instance.pk|yesno:"Atualizar Partida,Criar Nova Partida" }}</h1>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Salvar</button>
+    </form>
+    <a href="{% url 'lista_partidas' %}">Voltar para a lista de partidas</a>
+  </body>
+</html>
