@@ -2,16 +2,41 @@
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Listar Jogadores</title>
 		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 10px;
+				background-color: #1e1e1e;
+				color: #ffffff;
+				min-height: 100vh;
+				box-sizing: border-box;
+			}
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+			.top-links {
+				display: flex;
+				gap: 10px;
+			}
+			.main-container {
+				max-width: 1000px;
+				margin: 0 auto;
+			}
 			table {
 				width: 100%;
 				border-collapse: collapse;
+				background-color: #2d2d2d;
 			}
 			table,
 			th,
 			td {
-				border: 1px solid black;
+				border: 1px solid #444;
 			}
 			th,
 			td {
@@ -19,36 +44,75 @@
 				text-align: left;
 			}
 			th {
-				background-color: #f2f2f2;
+				background-color: #3d3d3d;
+			}
+			.btn {
+				display: inline-block;
+				padding: 8px 16px;
+				background-color: #4caf50;
+				color: white;
+				text-decoration: none;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 14px;
+			}
+			.btn:hover {
+				background-color: #45a049;
+			}
+			.btn-edit {
+				padding: 5px 10px;
+				font-size: 0.9em;
+				background-color: #2196f3;
+			}
+			.btn-edit:hover {
+				background-color: #1976d2;
+			}
+			@media (max-width: 768px) {
+				.header {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+				.top-links {
+					margin-top: 10px;
+					flex-direction: column;
+				}
+				.btn {
+					width: 100%;
+					text-align: center;
+				}
 			}
 		</style>
 	</head>
 	<body>
-		<h1>Lista de Jogadores</h1>
-		<table>
-			<thead>
-				<tr>
-					<th>Nome</th>
-					<th>Idade</th>
-					<th>Time</th>
-					<th>Ações</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for jogador in jogadores %}
-				<tr>
-					<td>{{ jogador.nome }}</td>
-					<td>{{ jogador.idade }}</td>
-					<td>{{ jogador.time }}</td>
-					<td>
-						<a href="{% url 'editar_jogador' jogador.id %}">Editar</a>
-					</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<a href="{% url 'adicionar_jogador' %}">Adicionar Jogador</a>
-		<br />
-		<a href="{% url 'index' %}">Voltar ao Menu Principal</a>
+		<div class="header">
+			<h1>Lista de Jogadores</h1>
+			<div class="top-links">
+				<a href="{% url 'adicionar_jogador' %}" class="btn">Adicionar Jogador</a>
+				<a href="{% url 'index' %}" class="btn">Voltar ao Menu Principal</a>
+			</div>
+		</div>
+		<div class="main-container">
+			<table>
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Pontuação</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for jogador in jogadores %}
+					<tr>
+						<td>{{ jogador.nome }}</td>
+						<td>{{ jogador.pontuacao }}</td>
+						<td>
+							<a href="{% url 'editar_jogador' jogador.id %}" class="btn btn-edit">Editar</a>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 	</body>
 </html>

@@ -2,26 +2,224 @@
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Editar Partida</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 10px;
+				background-color: #1e1e1e;
+				color: #ffffff;
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+				box-sizing: border-box;
+			}
+			.body-other {
+				align-self: center;
+				align-content: center;
+				margin-right: 1%;
+			}
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+			.top-links {
+				display: flex;
+			}
+			form {
+				max-width: 1000px;
+				margin: 0 auto;
+				display: flex;
+				flex-direction: column;
+			}
+			.main-container {
+				display: flex;
+				justify-content: center;
+				width: 100%;
+				max-width: 1000px;
+				margin: 0 auto;
+			}
+			.content-container {
+				display: flex;
+				flex-direction: column;
+				width: 48%;
+				padding: 0 10px;
+			}
+			.form-container {
+				display: flex;
+				justify-content: flex-start;
+				margin-bottom: 20px;
+				width: 100%;
+			}
+			.form-row {
+				display: flex;
+				justify-content: space-between;
+				width: 100%;
+				margin-bottom: 10px;
+			}
+			.form-column {
+				width: 100%;
+			}
+			.teams-container {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+			}
+			.team {
+				width: 100%;
+			}
+			.separator {
+				width: 2px;
+				background-color: #444;
+				margin-left: 2.1%;
+				padding: 0.1%;
+			}
+			h1 {
+				text-align: center;
+			}
+			h3 {
+				text-align: center;
+			}
+			label,
+			input,
+			select {
+				display: block;
+				margin-bottom: 5px;
+				width: 100%;
+			}
+			input,
+			select {
+				padding: 5px;
+				background-color: #2d2d2d;
+				color: #ffffff;
+				border: 1px solid #444;
+			}
+			.btn {
+				display: inline-block;
+				padding: 8px 16px;
+				background-color: #4caf50;
+				color: white;
+				text-decoration: none;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 14px;
+			}
+			.btn:hover {
+				background-color: #45a049;
+			}
+			.submit-button {
+				text-align: center;
+				margin-top: 15px;
+			}
+			.jogador-column {
+				width: 65%;
+			}
+			.acs-column {
+				width: 30%;
+				align-content: end;
+			}
+			@media (max-width: 768px) {
+				.header {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+				.top-links {
+					margin-top: 10px;
+				}
+				.main-container {
+					flex-direction: column;
+				}
+				.content-container {
+					width: 100%;
+					padding: 0;
+				}
+				.separator {
+					width: 100%;
+					height: 2px;
+					margin: 15px 0;
+				}
+				.form-row {
+					flex-direction: column;
+				}
+				.jogador-column,
+				.acs-column {
+					width: 100%;
+				}
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Editar Partida</h1>
-		<form method="post">
-			{% csrf_token %}
-			<label for="time1">Time 1:</label>
-			<input type="text" id="time1" name="time1" value="{{ partida.time1 }}" required />
-			<br />
-			<label for="time2">Time 2:</label>
-			<input type="text" id="time2" name="time2" value="{{ partida.time2 }}" required />
-			<br />
-			<label for="mapa">Mapa:</label>
-			<input type="text" id="mapa" name="mapa" value="{{ partida.mapa }}" required />
-			<br />
-			<label for="data">Data:</label>
-			<input type="date" id="data" name="data" value="{{ partida.data }}" required />
-			<br />
-			<button type="submit">Salvar</button>
-		</form>
-		<a href="{% url 'listar_partidas' %}">Voltar para a lista de partidas</a>
+		<div class="header">
+			<h1>Editar Partida</h1>
+			<div class="top-links">
+				<a href="{% url 'listar_partidas' %}" class="btn">Voltar para a lista de partidas</a>
+			</div>
+		</div>
+		<div class="body-other">
+			<form method="post">
+				{% csrf_token %}
+				<div class="main-container">
+					<div class="content-container">
+						<div class="form-container">
+							<div class="form-row">
+								<div class="form-column">
+									<label for="{{ form.mapa.id_for_label }}">Mapa:</label>
+									{{ form.mapa }}
+								</div>
+							</div>
+						</div>
+						<div class="teams-container">
+							<h3>Time 1</h3>
+							{% for i in '12345' %}
+							<div class="form-row">
+								<div class="jogador-column">
+									<label for="{{ form.jogador1_time1.id_for_label }}">Jogador {{ forloop.counter }}:</label>
+									{{ form.jogador1_time1 }}
+								</div>
+								<div class="acs-column">
+									<label for="{{ form.acs1_time1.id_for_label }}">ACS {{ forloop.counter }}:</label>
+									{{ form.acs1_time1 }}
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="separator"></div>
+					<div class="content-container">
+						<div class="form-container">
+							<div class="form-row">
+								<div class="form-column">
+									<label for="{{ form.data.id_for_label }}">Data:</label>
+									<input type="date" id="{{ form.data.id_for_label }}" name="{{ form.data.html_name }}" value="{{ form.data.value|date:'Y-m-d' }}" required />
+								</div>
+							</div>
+						</div>
+						<div class="teams-container">
+							<h3>Time 2</h3>
+							{% for i in '12345' %}
+							<div class="form-row">
+								<div class="jogador-column">
+									<label for="{{ form.jogador1_time2.id_for_label }}">Jogador {{ forloop.counter }}:</label>
+									{{ form.jogador1_time2 }}
+								</div>
+								<div class="acs-column">
+									<label for="{{ form.acs1_time2.id_for_label }}">ACS {{ forloop.counter }}:</label>
+									{{ form.acs1_time2 }}
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				<div class="submit-button">
+					<button type="submit" class="btn">Salvar Partida</button>
+				</div>
+			</form>
+		</div>
 	</body>
 </html>

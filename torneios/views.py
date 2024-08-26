@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Jogador, Time, Mapa, Tabela_de_partidas, Tabela_de_jogadores
-from .forms import JogadorForm, TimeForm, MapaForm, Tabela_de_partidasForm, Tabela_de_jogadoresForm
+from .models import Jogador, Partida
+from .forms import JogadorForm, PartidaForm
+import logging
 
+logger = logging.getLogger(__name__)
 
 def home(request):
     return render(request, 'paginas/index.html')
 
-#CRUD Jogador
+# CRUD Jogador
 
 def listar_jogadores(request):
     jogadores = Jogador.objects.all()
@@ -33,167 +35,45 @@ def editar_jogador(request, pk):
         form = JogadorForm(instance=jogador)
     return render(request, 'paginas/editar_jogador.html', {'form': form})
 
-def remover_jogador(request, pk):
-    jogador = get_object_or_404(Jogador, pk=pk)
-    jogador.delete()
-    return redirect('listar_jogadores')
+# def remover_jogador(request, pk):
+#     jogador = get_object_or_404(Jogador, pk=pk)
+#     jogador.delete()
+#     return redirect('listar_jogadores')
 
-#CRUD Time
-
-def listar_times(request):
-    times = Time.objects.all()
-    return render(request, 'paginas/listar_times.html', {'times': times})
-
-def adicionar_time(request):
-    if request.method == 'POST':
-        form = TimeForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('listar_times')
-    else:
-        form = TimeForm()
-    return render(request, 'paginas/adicionar_time.html', {'form': form})
-
-def editar_time(request, pk):
-    time = get_object_or_404(Time, pk=pk)
-    if request.method == 'POST':
-        form = TimeForm(request.POST, instance=time)
-        if form.is_valid():
-            form.save()
-            return redirect('listar_times')
-    else:
-        form = TimeForm(instance=time)
-    return render(request, 'paginas/editar_time.html', {'form': form})
-
-def remover_time(request, pk):
-    time = get_object_or_404(Time, pk=pk)
-    time.delete()
-    return redirect('listar_times')
-
-#CRUD Mapa
-
-def listar_mapas(request):
-    mapas = Mapa.objects.all()
-    return render(request, 'paginas/listar_mapas.html', {'mapas': mapas})
-
-def adicionar_mapa(request):
-    if request.method == 'POST':
-        form = MapaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('listar_mapas')
-    else:
-        form = MapaForm()
-    return render(request, 'paginas/adicionar_mapa.html', {'form': form})
-
-def editar_mapa(request, pk):
-    mapa = get_object_or_404(Mapa, pk=pk)
-    if request.method == 'POST':
-        form = MapaForm(request.POST, instance=mapa)
-        if form.is_valid():
-            form.save()
-            return redirect('listar_mapas')
-    else:
-        form = MapaForm(instance=mapa)
-    return render(request, 'paginas/editar_mapa.html', {'form': form})
-
-def remover_mapa(request, pk):
-    mapa = get_object_or_404(Mapa, pk=pk)
-    mapa.delete()
-    return redirect('listar_mapas')
-
-def listar_jogadores_tabela(request):
-    jogadores_tabela = Tabela_de_jogadores.objects.all()
-    return render(request, 'paginas/listar_jogadores_tabela.html', {'jogadores_tabela': jogadores_tabela})
-
-def adicionar_jogador_tabela(request):
-    if request.method == 'POST':
-        form = Tabela_de_jogadoresForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('listar_jogadores_tabela')
-    else:
-        form = Tabela_de_jogadoresForm()
-    return render(request, 'paginas/adicionar_jogador_tabela.html', {'form': form})
-
-def editar_jogador_tabela(request, pk):
-    jogador_tabela = get_object_or_404(Tabela_de_jogadores, pk=pk)
-    if request.method == 'POST':
-        form = Tabela_de_jogadoresForm(request.POST, instance=jogador_tabela)
-        if form.is_valid():
-            form.save()
-            return redirect('listar_jogadores_tabela')
-    else:
-        form = Tabela_de_jogadoresForm(instance=jogador_tabela)
-    return render(request, 'paginas/editar_jogador_tabela.html', {'form': form})
-
-def remover_jogador_tabela(request, pk):
-    jogador_tabela = get_object_or_404(Tabela_de_jogadores, pk=pk)
-    jogador_tabela.delete()
-    return redirect('listar_jogadores_tabela')
-
-#CRUD Tabela_de_partidas
+# CRUD Partida
 
 def listar_partidas(request):
-    partidas = Tabela_de_partidas.objects.all()
+    partidas = Partida.objects.all()
     return render(request, 'paginas/listar_partidas.html', {'partidas': partidas})
 
 def adicionar_partida(request):
     if request.method == 'POST':
-        form = Tabela_de_partidasForm(request.POST)
+        form = PartidaForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('listar_partidas')
+            try:
+                partida = form.save()
+                logger.info(f"Partida adicionada com sucesso! ID: {partida.id}")
+                return redirect('listar_partidas')
+            except Exception as e:
+                logger.error(f"Erro ao salvar a partida: {str(e)}")
+        else:
+            logger.warning(f"Formulário inválido: {form.errors}")
     else:
-        form = Tabela_de_partidasForm()
+        form = PartidaForm()
     return render(request, 'paginas/adicionar_partida.html', {'form': form})
 
 def editar_partida(request, pk):
-    partida = get_object_or_404(Tabela_de_partidas, pk=pk)
+    partida = get_object_or_404(Partida, pk=pk)
     if request.method == 'POST':
-        form = Tabela_de_partidasForm(request.POST, instance=partida)
+        form = PartidaForm(request.POST, instance=partida)
         if form.is_valid():
             form.save()
             return redirect('listar_partidas')
     else:
-        form = Tabela_de_partidasForm(instance=partida)
-    return render(request, 'paginas/editar_partida.html', {'form': form})
+        form = PartidaForm(instance=partida)
+    return render(request, 'paginas/editar_partida.html', {'form': form, 'partida': partida})
 
-def remover_partida(request, pk):
-    partida = get_object_or_404(Tabela_de_partidas, pk=pk)
-    partida.delete()
-    return redirect('listar_partidas')
-
-#CRUD Tabela_de_jogadores
-
-def listar_jogadores_tabela(request):
-    jogadores_tabela = Tabela_de_jogadores.objects.all()
-    return render(request, 'paginas/listar_jogadores_tabela.html', {'jogadores_tabela': jogadores_tabela})
-
-def adicionar_jogador_tabela(request):
-    if request.method == 'POST':
-        form = Tabela_de_jogadoresForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('listar_jogadores_tabela')
-    else:
-        form = Tabela_de_jogadoresForm()
-    return render(request, 'paginas/adicionar_jogador_tabela.html', {'form': form})
-
-def editar_jogador_tabela(request, pk):
-    jogador_tabela = get_object_or_404(Tabela_de_jogadores, pk=pk)
-    if request.method == 'POST':
-        form = Tabela_de_jogadoresForm(request.POST, instance=jogador_tabela)
-        if form.is_valid():
-            form.save()
-            return redirect('listar_jogadores_tabela')
-    else:
-        form = Tabela_de_jogadoresForm(instance=jogador_tabela)
-    return render(request, 'paginas/editar_jogador_tabela.html', {'form': form})
-
-def remover_jogador_tabela(request, pk):
-    jogador_tabela = get_object_or_404(Tabela_de_jogadores, pk=pk)
-    jogador_tabela.delete()
-    return redirect('listar_jogadores_tabela')
-
-
+# def remover_partida(request, pk):
+#     partida = get_object_or_404(Partida, pk=pk)
+#     partida.delete()
+#     return redirect('listar_partidas')

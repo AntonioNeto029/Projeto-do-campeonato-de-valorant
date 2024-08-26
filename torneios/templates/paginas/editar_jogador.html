@@ -2,23 +2,122 @@
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Editar Jogador</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 10px;
+				background-color: #1e1e1e;
+				color: #ffffff;
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+				box-sizing: border-box;
+			}
+			.body-other {
+				align-self: center;
+				align-content: center;
+				margin-right: 1%;
+			}
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+			.top-links {
+				display: flex;
+			}
+			form {
+				max-width: 500px;
+				margin: 0 auto;
+				display: flex;
+				flex-direction: column;
+			}
+			.form-row {
+				display: flex;
+				justify-content: space-between;
+				width: 100%;
+				margin-bottom: 10px;
+			}
+			.form-column {
+				width: 100%;
+			}
+			h1 {
+				text-align: center;
+			}
+			label,
+			input {
+				display: block;
+				margin-bottom: 5px;
+				width: 100%;
+			}
+			input {
+				padding: 5px;
+				background-color: #2d2d2d;
+				color: #ffffff;
+				border: 1px solid #444;
+			}
+			.btn {
+				display: inline-block;
+				padding: 8px 16px;
+				background-color: #4caf50;
+				color: white;
+				text-decoration: none;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 14px;
+			}
+			.btn:hover {
+				background-color: #45a049;
+			}
+			.submit-button {
+				text-align: center;
+				margin-top: 15px;
+			}
+			@media (max-width: 768px) {
+				.header {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+				.top-links {
+					margin-top: 10px;
+				}
+				.form-row {
+					flex-direction: column;
+				}
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Editar Jogador</h1>
-		<form method="post">
-			{% csrf_token %}
-			<label for="nome">Nome:</label>
-			<input type="text" id="nome" name="nome" value="{{ jogador.nome }}" required />
-			<br />
-			<label for="idade">Idade:</label>
-			<input type="number" id="idade" name="idade" value="{{ jogador.idade }}" required />
-			<br />
-			<label for="time">Time:</label>
-			<input type="text" id="time" name="time" value="{{ jogador.time }}" required />
-			<br />
-			<button type="submit">Salvar</button>
-		</form>
-		<a href="{% url 'listar_jogadores' %}">Voltar para a lista de jogadores</a>
+		<div class="header">
+			<h1>Editar Jogador</h1>
+			<div class="top-links">
+				<a href="{% url 'listar_jogadores' %}" class="btn">Voltar para a lista de jogadores</a>
+			</div>
+		</div>
+		<div class="body-other">
+			<form method="post">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="form-column">
+						<label for="nome">Nome:</label>
+						<input type="text" id="nome" name="nome" value="{{ form.nome.value }}" required />
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-column">
+						<label for="pontuacao">Pontuação:</label>
+						<input type="number" id="pontuacao" name="pontuacao" value="{{ form.pontuacao.value }}" required />
+					</div>
+				</div>
+				<div class="submit-button">
+					<button type="submit" class="btn">Salvar Jogador</button>
+				</div>
+			</form>
+		</div>
 	</body>
 </html>

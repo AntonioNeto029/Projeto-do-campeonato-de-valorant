@@ -2,16 +2,43 @@
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Listar Partidas</title>
 		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 20px;
+				background-color: #1e1e1e;
+				color: #ffffff;
+			}
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+			.top-links {
+				display: flex;
+			}
+			.partidas-container {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+			}
+			.partida-wrapper {
+				width: calc(50% - 10px);
+				margin-bottom: 20px;
+			}
 			table {
 				width: 100%;
 				border-collapse: collapse;
+				background-color: #2d2d2d;
 			}
 			table,
 			th,
 			td {
-				border: 1px solid black;
+				border: 1px solid #444;
 			}
 			th,
 			td {
@@ -19,38 +46,117 @@
 				text-align: left;
 			}
 			th {
-				background-color: #f2f2f2;
+				background-color: #3d3d3d;
+			}
+			.partida-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.btn {
+				display: inline-block;
+				padding: 10px 20px;
+				background-color: #4caf50;
+				color: white;
+				text-decoration: none;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				margin-left: 10px;
+			}
+			.btn:hover {
+				background-color: #45a049;
+			}
+			.btn-edit {
+				padding: 5px 10px;
+				font-size: 0.9em;
+				background-color: #2196f3;
+			}
+			.btn-edit:hover {
+				background-color: #1976d2;
+			}
+			@media (max-width: 768px) {
+				.header {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+				.top-links {
+					margin-top: 10px;
+				}
+				.partida-wrapper {
+					width: 100%;
+				}
 			}
 		</style>
 	</head>
 	<body>
-		<h1>Lista de Partidas</h1>
-		<table>
-			<thead>
-				<tr>
-					<th>Time 1</th>
-					<th>Time 2</th>
-					<th>Mapa</th>
-					<th>Data</th>
-					<th>Ações</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for partida in partidas %}
-				<tr>
-					<td>{{ partida.time1 }}</td>
-					<td>{{ partida.time2 }}</td>
-					<td>{{ partida.mapa }}</td>
-					<td>{{ partida.data }}</td>
-					<td>
-						<a href="{% url 'editar_partida' partida.id %}">Editar</a>
-					</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<a href="{% url 'adicionar_partida' %}">Adicionar Partida</a>
-		<br />
-		<a href="{% url 'index' %}">Voltar ao Menu Principal</a>
+		<div class="header">
+			<h1>Lista de Partidas</h1>
+			<div class="top-links">
+				<a href="{% url 'adicionar_partida' %}" class="btn">Adicionar Partida</a>
+				<a href="{% url 'index' %}" class="btn">Voltar ao Menu Principal</a>
+			</div>
+		</div>
+
+		<div class="partidas-container">
+			{% for partida in partidas %}
+			<div class="partida-wrapper">
+				<table>
+					<thead>
+						<tr>
+							<th colspan="4">
+								<div class="partida-header">
+									<span>Partida: {{ partida.mapa }} - {{ partida.data }}</span>
+									<a href="{% url 'editar_partida' partida.id %}" class="btn btn-edit">Editar</a>
+								</div>
+							</th>
+						</tr>
+						<tr>
+							<th colspan="2">Time 1</th>
+							<th colspan="2">Time 2</th>
+						</tr>
+						<tr>
+							<th>Jogador</th>
+							<th>ACS</th>
+							<th>Jogador</th>
+							<th>ACS</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ partida.jogador1_time1.nome }}</td>
+							<td>{{ partida.acs1_time1 }}</td>
+							<td>{{ partida.jogador1_time2.nome }}</td>
+							<td>{{ partida.acs1_time2 }}</td>
+						</tr>
+						<tr>
+							<td>{{ partida.jogador2_time1.nome }}</td>
+							<td>{{ partida.acs2_time1 }}</td>
+							<td>{{ partida.jogador2_time2.nome }}</td>
+							<td>{{ partida.acs2_time2 }}</td>
+						</tr>
+						<tr>
+							<td>{{ partida.jogador3_time1.nome }}</td>
+							<td>{{ partida.acs3_time1 }}</td>
+							<td>{{ partida.jogador3_time2.nome }}</td>
+							<td>{{ partida.acs3_time2 }}</td>
+						</tr>
+						<tr>
+							<td>{{ partida.jogador4_time1.nome }}</td>
+							<td>{{ partida.acs4_time1 }}</td>
+							<td>{{ partida.jogador4_time2.nome }}</td>
+							<td>{{ partida.acs4_time2 }}</td>
+						</tr>
+						<tr>
+							<td>{{ partida.jogador5_time1.nome }}</td>
+							<td>{{ partida.acs5_time1 }}</td>
+							<td>{{ partida.jogador5_time2.nome }}</td>
+							<td>{{ partida.acs5_time2 }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			{% endfor %}
+		</div>
 	</body>
 </html>
