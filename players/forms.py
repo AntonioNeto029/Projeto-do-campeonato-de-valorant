@@ -29,4 +29,4 @@ class PartidaForm(forms.ModelForm):
 class JogadorPartidaForm(forms.ModelForm):
     class Meta:
         model = JogadorPartida
-        fields = ['jogador', 'partida', 'acs', 'pontos_partida']
+        fields = ['jogador', 'Partida', 'acs', 'pontos_partida']

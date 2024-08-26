@@ -24,26 +24,26 @@ class Mapa(models.Model):
     def __str__(self):
         return self.nome
     
-class Time_1(models.Model, Player):
+class Time_1(models.Model):
     jogador_1 = models.ForeignKey(Player, related_name='time1_jogador1', on_delete=models.CASCADE) 
-    jogador_2 = models.ForeignKey(Player, related_name='time1_jogador2' ,on_delete=models.CASCADE)
-    jogador_3 = models.ForeignKey(Player, related_name='time1_jogador3',on_delete=models.CASCADE)
-    jogador_4 = models.ForeignKey(Player, related_name='time1_jogador4',on_delete=models.CASCADE)
-    jogador_5 = models.ForeignKey(Player, related_name='time1_jogador5',on_delete=models.CASCADE)
+    jogador_2 = models.ForeignKey(Player, related_name='time1_jogador2', on_delete=models.CASCADE)
+    jogador_3 = models.ForeignKey(Player, related_name='time1_jogador3', on_delete=models.CASCADE)
+    jogador_4 = models.ForeignKey(Player, related_name='time1_jogador4', on_delete=models.CASCADE)
+    jogador_5 = models.ForeignKey(Player, related_name='time1_jogador5', on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"Time 1: {self.jogador_1, self.jogador_2, self.jogador_3, self.jogador_4, self.jogador_5}"
-    
-class Time_2(models.Model, Player):
-    jogador_1 = models.ForeignKey(Player, related_name='time2_jogador1' ,on_delete=models.CASCADE)
-    jogador_2 = models.ForeignKey(Player, related_name='time2_jogador2',on_delete=models.CASCADE)
-    jogador_3 = models.ForeignKey(Player, related_name='time2_jogador3',on_delete=models.CASCADE)
-    jogador_4 = models.ForeignKey(Player, related_name='time2_jogador4',on_delete=models.CASCADE)
-    jogador_5 = models.ForeignKey(Player, related_name='time2_jogador5',on_delete=models.CASCADE)
+        return f"Time 1: {self.jogador_1}, {self.jogador_2}, {self.jogador_3}, {self.jogador_4}, {self.jogador_5}"
+        
+class Time_2(models.Model):
+    jogador_1 = models.ForeignKey(Player, related_name='time2_jogador1', on_delete=models.CASCADE)
+    jogador_2 = models.ForeignKey(Player, related_name='time2_jogador2', on_delete=models.CASCADE)
+    jogador_3 = models.ForeignKey(Player, related_name='time2_jogador3', on_delete=models.CASCADE)
+    jogador_4 = models.ForeignKey(Player, related_name='time2_jogador4', on_delete=models.CASCADE)
+    jogador_5 = models.ForeignKey(Player, related_name='time2_jogador5', on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"Time 2: {self.jogador_1, self.jogador_2, self.jogador_3, self.jogador_4, self.jogador_5}"
-    
+        return f"Time 2: {self.jogador_1}, {self.jogador_2}, {self.jogador_3}, {self.jogador_4}, {self.jogador_5}"
+        
 class Partida(models.Model):
     mapa_jogado = models.ForeignKey(Mapa, on_delete=models.CASCADE)
     time_1 = models.ForeignKey(Time_1, on_delete=models.CASCADE)
