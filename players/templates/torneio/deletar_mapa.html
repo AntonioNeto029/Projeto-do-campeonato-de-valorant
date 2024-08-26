@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Deletar Mapa</title>
-  </head>
-  <body>
-    <h1>Deletar Mapa</h1>
-    <p>Tem certeza que deseja deletar {{ mapa.nome }}?</p>
-    <form method="post">
-      {% csrf_token %}
-      <button type="submit">Sim, deletar</button>
-    </form>
-    <a href="{% url 'lista_mapas' %}">Cancelar</a>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Deletar Mapa</title>
+	</head>
+	<body>
+		<h1>Deletar Mapa</h1>
+		<p>Tem certeza que deseja deletar {{ mapa.nome }}?</p>
+		<form method="post">
+			{% csrf_token %}
+			<button type="submit">Sim, deletar</button>
+		</form>
+		<a href="{% url 'lista_mapa' %}">Cancelar</a>
+	</body>
 </html>

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Player, Mapa, Time_1, Time_2, Partida, JogadorPartida, Menu
+from .models import Player, Mapa, Time, Time, Partida, JogadorPartida, Menu
 
 
 class MenuForm(forms.Form):
@@ -17,14 +17,14 @@ class MapaForm(forms.ModelForm):
         model = Mapa
         fields = ['nome']
 
-class Time1Form(forms.ModelForm):
+class timeForm(forms.ModelForm):
     class Meta:
-        model = Time_1
+        model = Time
         fields = ['jogador_1', 'jogador_2', 'jogador_3', 'jogador_4', 'jogador_5']
 
 class Time2Form(forms.ModelForm):
     class Meta:
-        model = Time_2
+        model = Time
         fields = ['jogador_1', 'jogador_2', 'jogador_3', 'jogador_4', 'jogador_5']
 
 class PartidaForm(forms.ModelForm):
@@ -35,4 +35,4 @@ class PartidaForm(forms.ModelForm):
 class JogadorPartidaForm(forms.ModelForm):
     class Meta:
         model = JogadorPartida
-        fields = ['jogador', 'Partida', 'acs', 'pontos_partida']
+        fields = ['jogador', 'partida', 'acs', 'pontos_partida']
