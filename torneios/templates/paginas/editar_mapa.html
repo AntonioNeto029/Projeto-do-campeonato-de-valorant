@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Editar Mapa</title>
+	</head>
+	<body>
+		<h1>Editar Mapa</h1>
+		<form method="post">
+			{% csrf_token %}
+			<label for="nome">Nome:</label>
+			<input type="text" id="nome" name="nome" value="{{ mapa.nome }}" required />
+			<br />
+			<label for="descricao">Descrição:</label>
+			<textarea id="descricao" name="descricao" required>{{ mapa.descricao }}</textarea>
+			<br />
+			<button type="submit">Salvar</button>
+		</form>
+		<a href="{% url 'listar_mapas' %}">Voltar para a lista de mapas</a>
+	</body>
+</html>

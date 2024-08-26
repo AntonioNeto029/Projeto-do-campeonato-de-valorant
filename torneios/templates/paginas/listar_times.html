@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Listar Times</title>
+		<style>
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			table,
+			th,
+			td {
+				border: 1px solid black;
+			}
+			th,
+			td {
+				padding: 8px;
+				text-align: left;
+			}
+			th {
+				background-color: #f2f2f2;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Lista de Times</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Descrição</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for time in times %}
+				<tr>
+					<td>{{ time.nome }}</td>
+					<td>{{ time.descricao }}</td>
+					<td>
+						<a href="{% url 'editar_time' time.id %}">Editar</a>
+						<a href="{% url 'deletar_time' time.id %}">Deletar</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{% url 'adicionar_time' %}">Adicionar Time</a>
+		<br />
+		<a href="{% url 'index' %}">Voltar ao Menu Principal</a>
+	</body>
+</html>

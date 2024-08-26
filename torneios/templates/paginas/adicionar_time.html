@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Adicionar Time</title>
+	</head>
+	<body>
+		<h1>Adicionar Time</h1>
+		<form method="post">
+			{% csrf_token %}
+			<label for="nome">Nome:</label>
+			<input type="text" id="nome" name="nome" required />
+			<br />
+			<label for="descricao">Descrição:</label>
+			<textarea id="descricao" name="descricao" required></textarea>
+			<br />
+			<button type="submit">Adicionar</button>
+		</form>
+		<a href="{% url 'listar_times' %}">Voltar para a lista de times</a>
+	</body>
+</html>

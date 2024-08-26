@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Listar Jogadores</title>
+		<style>
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			table,
+			th,
+			td {
+				border: 1px solid black;
+			}
+			th,
+			td {
+				padding: 8px;
+				text-align: left;
+			}
+			th {
+				background-color: #f2f2f2;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Lista de Jogadores</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Idade</th>
+					<th>Time</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for jogador in jogadores %}
+				<tr>
+					<td>{{ jogador.nome }}</td>
+					<td>{{ jogador.idade }}</td>
+					<td>{{ jogador.time }}</td>
+					<td>
+						<a href="{% url 'editar_jogador' jogador.id %}">Editar</a>
+						<a href="{% url 'deletar_jogador' jogador.id %}">Deletar</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{% url 'adicionar_jogador' %}">Adicionar Jogador</a>
+		<br />
+		<a href="{% url 'index' %}">Voltar ao Menu Principal</a>
+	</body>
+</html>

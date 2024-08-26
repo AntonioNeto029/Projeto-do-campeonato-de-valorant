@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Editar Partida</title>
+	</head>
+	<body>
+		<h1>Editar Partida</h1>
+		<form method="post">
+			{% csrf_token %}
+			<label for="time1">Time 1:</label>
+			<input type="text" id="time1" name="time1" value="{{ partida.time1 }}" required />
+			<br />
+			<label for="time2">Time 2:</label>
+			<input type="text" id="time2" name="time2" value="{{ partida.time2 }}" required />
+			<br />
+			<label for="mapa">Mapa:</label>
+			<input type="text" id="mapa" name="mapa" value="{{ partida.mapa }}" required />
+			<br />
+			<label for="data">Data:</label>
+			<input type="date" id="data" name="data" value="{{ partida.data }}" required />
+			<br />
+			<button type="submit">Salvar</button>
+		</form>
+		<a href="{% url 'listar_partidas' %}">Voltar para a lista de partidas</a>
+	</body>
+</html>
