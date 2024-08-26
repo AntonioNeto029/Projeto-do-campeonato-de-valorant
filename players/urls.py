@@ -2,6 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    
+    #URLs para Home
+    path('players/', views.home, name='home'),
+    
     # URLs para Jogadores
     path('jogadores/', views.lista_jogadores, name='lista_jogadores'),
     path('jogadores/criar/', views.criar_jogador, name='criar_jogador'),

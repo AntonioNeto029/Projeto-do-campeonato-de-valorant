@@ -1,5 +1,13 @@
 from django.db import models
 
+
+class Menu(models.Model):
+    nome = models.CharField(max_length=200)
+    link = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return self.nome
+
 class Player(models.Model):
     nome = models.CharField(max_length=200)
     pontos_totais = models.IntegerField(default=50)

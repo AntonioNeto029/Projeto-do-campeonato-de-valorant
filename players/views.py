@@ -1,8 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Player, Mapa, Time_1, Time_2, Partida, JogadorPartida
-from .forms import PlayerForm, MapaForm, Time1Form, Time2Form, PartidaForm, JogadorPartidaForm
+from .models import Player, Mapa, Time_1, Time_2, Partida, JogadorPartida, Menu
+from .forms import PlayerForm, MapaForm, Time1Form, Time2Form, PartidaForm, JogadorPartidaForm, MenuForm
 
 # CRUD para Jogadores
+
+def home(request):
+    home = home.objects.all()
+    return render(request, 'torneio/home.html', {'home': home})
+
 def lista_jogadores(request):
     jogadores = Player.objects.all()
     return render(request, 'torneio/lista_jogador.html', {'jogadores': jogadores})

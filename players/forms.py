@@ -1,5 +1,11 @@
 from django import forms
-from .models import Player, Mapa, Time_1, Time_2, Partida, JogadorPartida
+from .models import Player, Mapa, Time_1, Time_2, Partida, JogadorPartida, Menu
+
+
+class MenuForm(forms.Form):
+    class Meta:
+        model = Menu
+        fields = ['nome', 'link']
 
 class PlayerForm(forms.ModelForm):
     class Meta:
