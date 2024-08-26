@@ -102,6 +102,36 @@ def remover_mapa(request, pk):
     mapa.delete()
     return redirect('listar_mapas')
 
+def listar_jogadores_tabela(request):
+    jogadores_tabela = Tabela_de_jogadores.objects.all()
+    return render(request, 'paginas/listar_jogadores_tabela.html', {'jogadores_tabela': jogadores_tabela})
+
+def adicionar_jogador_tabela(request):
+    if request.method == 'POST':
+        form = Tabela_de_jogadoresForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_jogadores_tabela')
+    else:
+        form = Tabela_de_jogadoresForm()
+    return render(request, 'paginas/adicionar_jogador_tabela.html', {'form': form})
+
+def editar_jogador_tabela(request, pk):
+    jogador_tabela = get_object_or_404(Tabela_de_jogadores, pk=pk)
+    if request.method == 'POST':
+        form = Tabela_de_jogadoresForm(request.POST, instance=jogador_tabela)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_jogadores_tabela')
+    else:
+        form = Tabela_de_jogadoresForm(instance=jogador_tabela)
+    return render(request, 'paginas/editar_jogador_tabela.html', {'form': form})
+
+def remover_jogador_tabela(request, pk):
+    jogador_tabela = get_object_or_404(Tabela_de_jogadores, pk=pk)
+    jogador_tabela.delete()
+    return redirect('listar_jogadores_tabela')
+
 #CRUD Tabela_de_partidas
 
 def listar_partidas(request):
