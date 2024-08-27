@@ -34,6 +34,19 @@ class Partida(models.Model):
     acs3_time2 = models.IntegerField()
     acs4_time2 = models.IntegerField()
     acs5_time2 = models.IntegerField()
-
+    
+    pontos1_time1 = models.IntegerField()
+    pontos2_time1 = models.IntegerField()
+    pontos3_time1 = models.IntegerField()
+    pontos4_time1 = models.IntegerField()
+    pontos5_time1 = models.IntegerField()
+    
+    pontos1_time2 = models.IntegerField()
+    pontos2_time2 = models.IntegerField()
+    pontos3_time2 = models.IntegerField()
+    pontos4_time2 = models.IntegerField()
+    pontos5_time2 = models.IntegerField()
+    
+    
     def __str__(self):
         return f"Partida em {self.mapa} em {self.data}"

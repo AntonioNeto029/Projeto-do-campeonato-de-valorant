@@ -35,10 +35,10 @@ def editar_jogador(request, pk):
         form = JogadorForm(instance=jogador)
     return render(request, 'paginas/editar_jogador.html', {'form': form})
 
-# def remover_jogador(request, pk):
-#     jogador = get_object_or_404(Jogador, pk=pk)
-#     jogador.delete()
-#     return redirect('listar_jogadores')
+def remover_jogador(request, pk):
+    jogador = get_object_or_404(Jogador, pk=pk)
+    jogador.delete()
+    return redirect('listar_jogadores')
 
 # CRUD Partida
 
