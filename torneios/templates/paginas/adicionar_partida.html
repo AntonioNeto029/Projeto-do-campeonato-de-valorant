@@ -31,23 +31,24 @@
 				display: flex;
 			}
 			form {
-				max-width: 1000px;
+				max-width: 100%;
 				margin: 0 auto;
 				display: flex;
 				flex-direction: column;
 			}
 			.main-container {
 				display: flex;
-				justify-content: center;
+				flex-wrap: wrap;
+				justify-content: space-between;
 				width: 100%;
 				max-width: 1000px;
 				margin: 0 auto;
 			}
 			.content-container {
-				display: flex;
-				flex-direction: column;
-				width: 48%;
+				flex: 1;
+				min-width: 300px;
 				padding: 0 10px;
+				margin-bottom: 20px;
 			}
 			.form-container {
 				display: flex;
@@ -55,9 +56,16 @@
 				margin-bottom: 20px;
 				width: 100%;
 			}
+			/* .form-row {
+				display: flex;
+				justify-content: space-between;
+				width: 100%;
+				margin-bottom: 10px;
+			} */
 			.form-row {
 				display: flex;
 				justify-content: space-between;
+				align-items: flex-end;
 				width: 100%;
 				margin-bottom: 10px;
 			}
@@ -117,11 +125,15 @@
 				margin-top: 15px;
 			}
 			.jogador-column {
-				width: 65%;
+				width: 40%;
 			}
 			.acs-column {
-				width: 30%;
-				align-content: end;
+				width: 25%;
+				margin-right: 10px;
+			}
+			.pontos-column {
+				width: 25%;
+				margin-right: 10px;
 			}
 			@media (max-width: 768px) {
 				.header {
@@ -147,7 +159,13 @@
 					flex-direction: column;
 				}
 				.jogador-column,
-				.acs-column {
+				.acs-column,
+				.pontos-column {
+					width: 100%;
+					margin-right: 0;
+				}
+				input,
+				select {
 					width: 100%;
 				}
 			}
@@ -184,6 +202,10 @@
 									<label for="{{ form.acs1_time1.id_for_label }}">ACS 1:</label>
 									{{ form.acs1_time1 }}
 								</div>
+								<div class="pontos-column">
+									<label for="{{ form.pontos_time1.id_for_label }}">Pontos:</label>
+									{{ form.pontos1_time1 }}
+								</div>
 							</div>
 							<div class="form-row">
 								<div class="jogador-column">
@@ -193,6 +215,10 @@
 								<div class="acs-column">
 									<label for="{{ form.acs2_time1.id_for_label }}">ACS 2:</label>
 									{{ form.acs2_time1 }}
+								</div>
+								<div class="pontos-column">
+									<label for="{{ form.pontos2_time1.id_for_label }}">Pontos:</label>
+									{{ form.pontos2_time1 }}
 								</div>
 							</div>
 							<div class="form-row">
@@ -204,6 +230,10 @@
 									<label for="{{ form.acs3_time1.id_for_label }}">ACS 3:</label>
 									{{ form.acs3_time1 }}
 								</div>
+								<div class="pontos-column">
+									<label for="{{ form.pontos3_time1.id_for_label }}">Pontos:</label>
+									{{ form.pontos3_time1 }}
+								</div>
 							</div>
 							<div class="form-row">
 								<div class="jogador-column">
@@ -214,6 +244,10 @@
 									<label for="{{ form.acs4_time1.id_for_label }}">ACS 4:</label>
 									{{ form.acs4_time1 }}
 								</div>
+								<div class="pontos-column">
+									<label for="{{ form.pontos4_time1.id_for_label }}">Pontos:</label>
+									{{ form.pontos4_time1 }}
+								</div>
 							</div>
 							<div class="form-row">
 								<div class="jogador-column">
@@ -223,6 +257,10 @@
 								<div class="acs-column">
 									<label for="{{ form.acs5_time1.id_for_label }}">ACS 5:</label>
 									{{ form.acs5_time1 }}
+								</div>
+								<div class="pontos-column">
+									<label for="{{ form.pontos5_time1.id_for_label }}">Pontos:</label>
+									{{ form.pontos5_time1 }}
 								</div>
 							</div>
 						</div>
@@ -248,6 +286,10 @@
 									<label for="{{ form.acs1_time2.id_for_label }}">ACS 1:</label>
 									{{ form.acs1_time2 }}
 								</div>
+								<div class="pontos-column">
+									<label for="{{ form.pontos1_time2.id_for_label }}">Pontos:</label>
+									{{ form.pontos1_time2 }}
+								</div>
 							</div>
 							<div class="form-row">
 								<div class="jogador-column">
@@ -257,6 +299,10 @@
 								<div class="acs-column">
 									<label for="{{ form.acs2_time2.id_for_label }}">ACS 2:</label>
 									{{ form.acs2_time2 }}
+								</div>
+								<div class="pontos-column">
+									<label for="{{ form.pontos2_time2.id_for_label }}">Pontos:</label>
+									{{ form.pontos2_time2 }}
 								</div>
 							</div>
 							<div class="form-row">
@@ -268,6 +314,10 @@
 									<label for="{{ form.acs3_time2.id_for_label }}">ACS 3:</label>
 									{{ form.acs3_time2 }}
 								</div>
+								<div class="pontos-column">
+									<label for="{{ form.pontos3_time2.id_for_label }}">Pontos:</label>
+									{{ form.pontos3_time2 }}
+								</div>
 							</div>
 							<div class="form-row">
 								<div class="jogador-column">
@@ -278,6 +328,10 @@
 									<label for="{{ form.acs4_time2.id_for_label }}">ACS 4:</label>
 									{{ form.acs4_time2 }}
 								</div>
+								<div class="pontos-column">
+									<label for="{{ form.pontos4_time2.id_for_label }}">Pontos:</label>
+									{{ form.pontos4_time2 }}
+								</div>
 							</div>
 							<div class="form-row">
 								<div class="jogador-column">
@@ -287,6 +341,10 @@
 								<div class="acs-column">
 									<label for="{{ form.acs5_time2.id_for_label }}">ACS 5:</label>
 									{{ form.acs5_time2 }}
+								</div>
+								<div class="pontos-column">
+									<label for="{{ form.pontos5_time2.id_for_label }}">Pontos:</label>
+									{{ form.pontos5_time2 }}
 								</div>
 							</div>
 						</div>
