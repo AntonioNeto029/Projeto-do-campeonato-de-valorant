@@ -1,359 +1,490 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Adicionar Partida</title>
-		<style>
-			body {
-				font-family: Arial, sans-serif;
-				margin: 0;
-				padding: 10px;
-				background-color: #1e1e1e;
-				color: #ffffff;
-				display: flex;
-				flex-direction: column;
-				min-height: 100vh;
-				box-sizing: border-box;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adicionar Partida</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 10px;
+        background-color: #1e1e1e;
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+      .body-other {
+        align-self: center;
+        align-content: center;
+        margin-right: 1%;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .top-links {
+        display: flex;
+      }
+      form {
+        max-width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+      }
+      .main-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .content-container {
+        flex: 1;
+        min-width: 300px;
+        padding: 0 10px;
+        margin-bottom: 20px;
+      }
+      .form-container {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+      .form-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .form-column {
+        width: 100%;
+      }
+      .teams-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      .team {
+        width: 100%;
+      }
+      .separator {
+        width: 2px;
+        background-color: #444;
+        margin-left: 2.1%;
+        padding: 0.1%;
+      }
+      h1 {
+        text-align: center;
+      }
+      h3 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      label,
+      input,
+      select {
+        display: block;
+        margin-bottom: 5px;
+        width: 100%;
+      }
+      input,
+      select {
+        padding: 5px;
+        background-color: #2d2d2d;
+        color: #ffffff;
+        border: 1px solid #444;
+      }
+      .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .btn:hover {
+        background-color: #45a049;
+      }
+      .submit-button {
+        text-align: center;
+        margin-top: 15px;
+      }
+      .jogador-column {
+        width: 40%;
+      }
+      .acs-column {
+        width: 25%;
+        margin-right: 10px;
+      }
+      .pontos-column {
+        width: 25%;
+        margin-right: 10px;
+      }
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .top-links {
+          margin-top: 10px;
+        }
+        .main-container {
+          flex-direction: column;
+        }
+        .content-container {
+          width: 100%;
+          padding: 0;
+        }
+        .separator {
+          width: 100%;
+          height: 2px;
+          margin: 15px 0;
+        }
+        .form-row {
+          flex-direction: column;
+        }
+        .jogador-column,
+        .acs-column,
+        .pontos-column {
+          width: 100%;
+          margin-right: 0;
+        }
+        input,
+        select {
+          width: 100%;
+        }
+      }
+
+      .switch-container {
+        display: flex;
+        align-items: center;
+		margin-left: 10px;
+      }
+
+      .switch-label {
+        margin-right: 10px;
+        font-size: 18px;
+        vertical-align: middle;
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 54px;
+        height: 20px;
+        vertical-align: middle;
+
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #4caf50;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(14px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Adicionar Partida</h1>
+      <div class="top-links">
+        <a href="{% url 'listar_partidas' %}" class="btn"
+          >Voltar para a lista de partidas</a
+        >
+      </div>
+    </div>
+    <div class="body-other">
+      <form method="post">
+        {% csrf_token %}
+        <div class="main-container">
+          <div class="content-container">
+            <div class="form-container">
+              <div class="form-row">
+                <div class="form-column">
+                  <label for="{{ form.mapa.id_for_label }}">Mapa:</label>
+                  {{ form.mapa }}
+                </div>
+              </div>
+            </div>
+            <div class="teams-container">
+              <h3>
+                Time 1
+				<div class="switch-container">
+				<label class="switch-label">Vencedor</label>
+                <label class="switch">
+                  <input type="checkbox" id="vencedor-time1" name="vencedor" />
+                  <span class="slider round"></span>
+                </label>
+              </h3>
+              <div class="form-row">
+                <div class="jogador-column">
+                  <label for="{{ form.jogador1_time1.id_for_label }}"
+                    >Jogador 1:</label
+                  >
+                  {{ form.jogador1_time1 }}
+                </div>
+                <div class="acs-column">
+                  <label for="{{ form.acs1_time1.id_for_label }}">ACS 1:</label>
+                  {{ form.acs1_time1 }}
+                </div>
+                <div class="pontos-column">
+                  <label for="{{ form.pontos1_time1.id_for_label }}"
+                    >Pontos:</label
+                  >
+                  {{ form.pontos1_time1 }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="jogador-column">
+                  <label for="{{ form.jogador2_time1.id_for_label }}"
+                    >Jogador 2:</label
+                  >
+                  {{ form.jogador2_time1 }}
+                </div>
+                <div class="acs-column">
+                  <label for="{{ form.acs2_time1.id_for_label }}">ACS 2:</label>
+                  {{ form.acs2_time1 }}
+                </div>
+                <div class="pontos-column">
+                  <label for="{{ form.pontos2_time1.id_for_label }}"
+                    >Pontos:</label
+                  >
+                  {{ form.pontos2_time1 }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="jogador-column">
+                  <label for="{{ form.jogador3_time1.id_for_label }}"
+                    >Jogador 3:</label
+                  >
+                  {{ form.jogador3_time1 }}
+                </div>
+                <div class="acs-column">
+                  <label for="{{ form.acs3_time1.id_for_label }}">ACS 3:</label>
+                  {{ form.acs3_time1 }}
+                </div>
+                <div class="pontos-column">
+                  <label for="{{ form.pontos3_time1.id_for_label }}"
+                    >Pontos:</label
+                  >
+                  {{ form.pontos3_time1 }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="jogador-column">
+                  <label for="{{ form.jogador4_time1.id_for_label }}"
+                    >Jogador 4:</label
+                  >
+                  {{ form.jogador4_time1 }}
+                </div>
+                <div class="acs-column">
+                  <label for="{{ form.acs4_time1.id_for_label }}">ACS 4:</label>
+                  {{ form.acs4_time1 }}
+                </div>
+                <div class="pontos-column">
+                  <label for="{{ form.pontos4_time1.id_for_label }}"
+                    >Pontos:</label
+                  >
+                  {{ form.pontos4_time1 }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="jogador-column">
+                  <label for="{{ form.jogador5_time1.id_for_label }}"
+                    >Jogador 5:</label
+                  >
+                  {{ form.jogador5_time1 }}
+                </div>
+                <div class="acs-column">
+                  <label for="{{ form.acs5_time1.id_for_label }}">ACS 5:</label>
+                  {{ form.acs5_time1 }}
+                </div>
+                <div class="pontos-column">
+                  <label for="{{ form.pontos5_time1.id_for_label }}"
+                    >Pontos:</label
+                  >
+                  {{ form.pontos5_time1 }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <div class="content-container">
+            <div class="form-container">
+              <div class="form-row">
+                <div class="form-column">
+                  <label for="{{ form.data.id_for_label }}">Data:</label>
+                  <input
+                    type="date"
+                    id="{{ form.data.id_for_label }}"
+                    name="{{ form.data.html_name }}"
+                    value="{% now 'Y-m-d' %}"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="teams-container">
+              <h3>
+                Time 2
+                <div class="switch-container">
+				<label class="switch-label">Vencedor</label>
+                <label class="switch">
+                  <input type="checkbox" id="vencedor-time2" name="vencedor"/>
+                  <span class="slider round"></span>
+                </label>
+              </h3>
+              <div class="form-row">
+                <div class="jogador-column">
+                  <label for="{{ form.jogador1_time2.id_for_label }}"
+                    >Jogador 1:</label
+                  >
+                  {{ form.jogador1_time2 }}
+                </div>
+                <div class="acs-column">
+                  <label for="{{ form.acs1_time2.id_for_label }}">ACS 1:</label>
+                  {{ form.acs1_time2 }}
+                </div>
+                <div class="pontos-column">
+                  <label for="{{ form.pontos1_time2.id_for_label }}"
+                    >Pontos:</label
+                  >
+                  {{ form.pontos1_time2 }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="jogador-column">
+                  <label for="{{ form.jogador2_time2.id_for_label }}"
+                    >Jogador 2:</label
+                  >
+                  {{ form.jogador2_time2 }}
+                </div>
+                <div class="acs-column">
+                  <label for="{{ form.acs2_time2.id_for_label }}">ACS 2:</label>
+                  {{ form.acs2_time2 }}
+                </div>
+                <div class="pontos-column">
+                  <label for="{{ form.pontos2_time2.id_for_label }}"
+                    >Pontos:</label
+                  >
+                  {{ form.pontos2_time2 }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="jogador-column">
+                  <label for="{{ form.jogador3_time2.id_for_label }}"
+                    >Jogador 3:</label
+                  >
+                  {{ form.jogador3_time2 }}
+                </div>
+                <div class="acs-column">
+                  <label for="{{ form.acs3_time2.id_for_label }}">ACS 3:</label>
+                  {{ form.acs3_time2 }}
+                </div>
+                <div class="pontos-column">
+                  <label for="{{ form.pontos3_time2.id_for_label }}"
+                    >Pontos:</label
+                  >
+                  {{ form.pontos3_time2 }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="jogador-column">
+                  <label for="{{ form.jogador4_time2.id_for_label }}"
+                    >Jogador 4:</label
+                  >
+                  {{ form.jogador4_time2 }}
+                </div>
+                <div class="acs-column">
+                  <label for="{{ form.acs4_time2.id_for_label }}">ACS 4:</label>
+                  {{ form.acs4_time2 }}
+                </div>
+                <div class="pontos-column">
+                  <label for="{{ form.pontos4_time2.id_for_label }}"
+                    >Pontos:</label
+                  >
+                  {{ form.pontos4_time2 }}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="jogador-column">
+                  <label for="{{ form.jogador5_time2.id_for_label }}"
+                    >Jogador 5:</label
+                  >
+                  {{ form.jogador5_time2 }}
+                </div>
+                <div class="acs-column">
+                  <label for="{{ form.acs5_time2.id_for_label }}">ACS 5:</label>
+                  {{ form.acs5_time2 }}
+                </div>
+                <div class="pontos-column">
+                  <label for="{{ form.pontos5_time2.id_for_label }}"
+                    >Pontos:</label
+                  >
+                  {{ form.pontos5_time2 }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="submit-button">
+          <button type="submit" class="btn">Adicionar Partida</button>
+        </div>
+      </form>
+    </div>
+	<script>
+		document.getElementById('vencedor-time1').addEventListener('change', function() {
+			if (this.checked) {
+			document.getElementById('vencedor-time2').checked = false;
 			}
-			.body-other {
-				align-self: center;
-				align-content: center;
-				margin-right: 1%;
+		});
+
+		document.getElementById('vencedor-time2').addEventListener('change', function() {
+			if (this.checked) {
+			document.getElementById('vencedor-time1').checked = false;
 			}
-			.header {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				margin-bottom: 20px;
-			}
-			.top-links {
-				display: flex;
-			}
-			form {
-				max-width: 100%;
-				margin: 0 auto;
-				display: flex;
-				flex-direction: column;
-			}
-			.main-container {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
-				width: 100%;
-				max-width: 1000px;
-				margin: 0 auto;
-			}
-			.content-container {
-				flex: 1;
-				min-width: 300px;
-				padding: 0 10px;
-				margin-bottom: 20px;
-			}
-			.form-container {
-				display: flex;
-				justify-content: flex-start;
-				margin-bottom: 20px;
-				width: 100%;
-			}
-			/* .form-row {
-				display: flex;
-				justify-content: space-between;
-				width: 100%;
-				margin-bottom: 10px;
-			} */
-			.form-row {
-				display: flex;
-				justify-content: space-between;
-				align-items: flex-end;
-				width: 100%;
-				margin-bottom: 10px;
-			}
-			.form-column {
-				width: 100%;
-			}
-			.teams-container {
-				display: flex;
-				flex-direction: column;
-				width: 100%;
-			}
-			.team {
-				width: 100%;
-			}
-			.separator {
-				width: 2px;
-				background-color: #444;
-				margin-left: 2.1%;
-				padding: 0.1%;
-			}
-			h1 {
-				text-align: center;
-			}
-			h3 {
-				text-align: center;
-			}
-			label,
-			input,
-			select {
-				display: block;
-				margin-bottom: 5px;
-				width: 100%;
-			}
-			input,
-			select {
-				padding: 5px;
-				background-color: #2d2d2d;
-				color: #ffffff;
-				border: 1px solid #444;
-			}
-			.btn {
-				display: inline-block;
-				padding: 8px 16px;
-				background-color: #4caf50;
-				color: white;
-				text-decoration: none;
-				border: none;
-				border-radius: 4px;
-				cursor: pointer;
-				font-size: 14px;
-			}
-			.btn:hover {
-				background-color: #45a049;
-			}
-			.submit-button {
-				text-align: center;
-				margin-top: 15px;
-			}
-			.jogador-column {
-				width: 40%;
-			}
-			.acs-column {
-				width: 25%;
-				margin-right: 10px;
-			}
-			.pontos-column {
-				width: 25%;
-				margin-right: 10px;
-			}
-			@media (max-width: 768px) {
-				.header {
-					flex-direction: column;
-					align-items: flex-start;
-				}
-				.top-links {
-					margin-top: 10px;
-				}
-				.main-container {
-					flex-direction: column;
-				}
-				.content-container {
-					width: 100%;
-					padding: 0;
-				}
-				.separator {
-					width: 100%;
-					height: 2px;
-					margin: 15px 0;
-				}
-				.form-row {
-					flex-direction: column;
-				}
-				.jogador-column,
-				.acs-column,
-				.pontos-column {
-					width: 100%;
-					margin-right: 0;
-				}
-				input,
-				select {
-					width: 100%;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<div class="header">
-			<h1>Adicionar Partida</h1>
-			<div class="top-links">
-				<a href="{% url 'listar_partidas' %}" class="btn">Voltar para a lista de partidas</a>
-			</div>
-		</div>
-		<div class="body-other">
-			<form method="post">
-				{% csrf_token %}
-				<div class="main-container">
-					<div class="content-container">
-						<div class="form-container">
-							<div class="form-row">
-								<div class="form-column">
-									<label for="{{ form.mapa.id_for_label }}">Mapa:</label>
-									{{ form.mapa }}
-								</div>
-							</div>
-						</div>
-						<div class="teams-container">
-							<h3>Time 1</h3>
-							<div class="form-row">
-								<div class="jogador-column">
-									<label for="{{ form.jogador1_time1.id_for_label }}">Jogador 1:</label>
-									{{ form.jogador1_time1 }}
-								</div>
-								<div class="acs-column">
-									<label for="{{ form.acs1_time1.id_for_label }}">ACS 1:</label>
-									{{ form.acs1_time1 }}
-								</div>
-								<div class="pontos-column">
-									<label for="{{ form.pontos_time1.id_for_label }}">Pontos:</label>
-									{{ form.pontos1_time1 }}
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="jogador-column">
-									<label for="{{ form.jogador2_time1.id_for_label }}">Jogador 2:</label>
-									{{ form.jogador2_time1 }}
-								</div>
-								<div class="acs-column">
-									<label for="{{ form.acs2_time1.id_for_label }}">ACS 2:</label>
-									{{ form.acs2_time1 }}
-								</div>
-								<div class="pontos-column">
-									<label for="{{ form.pontos2_time1.id_for_label }}">Pontos:</label>
-									{{ form.pontos2_time1 }}
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="jogador-column">
-									<label for="{{ form.jogador3_time1.id_for_label }}">Jogador 3:</label>
-									{{ form.jogador3_time1 }}
-								</div>
-								<div class="acs-column">
-									<label for="{{ form.acs3_time1.id_for_label }}">ACS 3:</label>
-									{{ form.acs3_time1 }}
-								</div>
-								<div class="pontos-column">
-									<label for="{{ form.pontos3_time1.id_for_label }}">Pontos:</label>
-									{{ form.pontos3_time1 }}
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="jogador-column">
-									<label for="{{ form.jogador4_time1.id_for_label }}">Jogador 4:</label>
-									{{ form.jogador4_time1 }}
-								</div>
-								<div class="acs-column">
-									<label for="{{ form.acs4_time1.id_for_label }}">ACS 4:</label>
-									{{ form.acs4_time1 }}
-								</div>
-								<div class="pontos-column">
-									<label for="{{ form.pontos4_time1.id_for_label }}">Pontos:</label>
-									{{ form.pontos4_time1 }}
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="jogador-column">
-									<label for="{{ form.jogador5_time1.id_for_label }}">Jogador 5:</label>
-									{{ form.jogador5_time1 }}
-								</div>
-								<div class="acs-column">
-									<label for="{{ form.acs5_time1.id_for_label }}">ACS 5:</label>
-									{{ form.acs5_time1 }}
-								</div>
-								<div class="pontos-column">
-									<label for="{{ form.pontos5_time1.id_for_label }}">Pontos:</label>
-									{{ form.pontos5_time1 }}
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="separator"></div>
-					<div class="content-container">
-						<div class="form-container">
-							<div class="form-row">
-								<div class="form-column">
-									<label for="{{ form.data.id_for_label }}">Data:</label>
-									<input type="date" id="{{ form.data.id_for_label }}" name="{{ form.data.html_name }}" value="{% now 'Y-m-d' %}" />
-								</div>
-							</div>
-						</div>
-						<div class="teams-container">
-							<h3>Time 2</h3>
-							<div class="form-row">
-								<div class="jogador-column">
-									<label for="{{ form.jogador1_time2.id_for_label }}">Jogador 1:</label>
-									{{ form.jogador1_time2 }}
-								</div>
-								<div class="acs-column">
-									<label for="{{ form.acs1_time2.id_for_label }}">ACS 1:</label>
-									{{ form.acs1_time2 }}
-								</div>
-								<div class="pontos-column">
-									<label for="{{ form.pontos1_time2.id_for_label }}">Pontos:</label>
-									{{ form.pontos1_time2 }}
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="jogador-column">
-									<label for="{{ form.jogador2_time2.id_for_label }}">Jogador 2:</label>
-									{{ form.jogador2_time2 }}
-								</div>
-								<div class="acs-column">
-									<label for="{{ form.acs2_time2.id_for_label }}">ACS 2:</label>
-									{{ form.acs2_time2 }}
-								</div>
-								<div class="pontos-column">
-									<label for="{{ form.pontos2_time2.id_for_label }}">Pontos:</label>
-									{{ form.pontos2_time2 }}
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="jogador-column">
-									<label for="{{ form.jogador3_time2.id_for_label }}">Jogador 3:</label>
-									{{ form.jogador3_time2 }}
-								</div>
-								<div class="acs-column">
-									<label for="{{ form.acs3_time2.id_for_label }}">ACS 3:</label>
-									{{ form.acs3_time2 }}
-								</div>
-								<div class="pontos-column">
-									<label for="{{ form.pontos3_time2.id_for_label }}">Pontos:</label>
-									{{ form.pontos3_time2 }}
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="jogador-column">
-									<label for="{{ form.jogador4_time2.id_for_label }}">Jogador 4:</label>
-									{{ form.jogador4_time2 }}
-								</div>
-								<div class="acs-column">
-									<label for="{{ form.acs4_time2.id_for_label }}">ACS 4:</label>
-									{{ form.acs4_time2 }}
-								</div>
-								<div class="pontos-column">
-									<label for="{{ form.pontos4_time2.id_for_label }}">Pontos:</label>
-									{{ form.pontos4_time2 }}
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="jogador-column">
-									<label for="{{ form.jogador5_time2.id_for_label }}">Jogador 5:</label>
-									{{ form.jogador5_time2 }}
-								</div>
-								<div class="acs-column">
-									<label for="{{ form.acs5_time2.id_for_label }}">ACS 5:</label>
-									{{ form.acs5_time2 }}
-								</div>
-								<div class="pontos-column">
-									<label for="{{ form.pontos5_time2.id_for_label }}">Pontos:</label>
-									{{ form.pontos5_time2 }}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="submit-button">
-					<button type="submit" class="btn">Adicionar Partida</button>
-				</div>
-			</form>
-		</div>
-	</body>
+		});
+	</script>
+  </body>
 </html>
