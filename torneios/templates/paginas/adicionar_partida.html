@@ -131,6 +131,10 @@
         width: 25%;
         margin-right: 10px;
       }
+      .vencedor-column {
+        
+        {% comment %} display: none; {% endcomment %}
+      }
       @media (max-width: 768px) {
         .header {
           flex-direction: column;
@@ -254,7 +258,7 @@
 				<div class="switch-container">
 				<label class="switch-label">Vencedor</label>
                 <label class="switch">
-                  <input type="checkbox" id="vencedor-time1" name="vencedor" />
+                  <input type="checkbox" id="vencedor_time1" name="vencedor" />
                   <span class="slider round"></span>
                 </label>
               </h3>
@@ -275,6 +279,8 @@
                   >
                   {{ form.pontos1_time1 }}
                 </div>
+                <div class="vencedor-column">
+                  <input type="checkbox" id="form.jogador1_time1" name="vencedor-jogador1-time1" />
               </div>
               <div class="form-row">
                 <div class="jogador-column">
@@ -293,6 +299,9 @@
                   >
                   {{ form.pontos2_time1 }}
                 </div>
+                <div class="vencedor-column">
+                  <input type="checkbox" id="form.jogador2_time1" name="vencedor-jogador2-time1" />
+              </div>
               </div>
               <div class="form-row">
                 <div class="jogador-column">
@@ -311,6 +320,9 @@
                   >
                   {{ form.pontos3_time1 }}
                 </div>
+                <div class="vencedor-column">
+                  <input type="checkbox" id="form.jogador3_time1" name="vencedor-jogador3-time1" />
+              </div>
               </div>
               <div class="form-row">
                 <div class="jogador-column">
@@ -329,6 +341,9 @@
                   >
                   {{ form.pontos4_time1 }}
                 </div>
+                <div class="vencedor-column">
+                  <input type="checkbox" id="form.jogador4_time1" name="vencedor-jogador4-time1" />
+              </div>
               </div>
               <div class="form-row">
                 <div class="jogador-column">
@@ -347,6 +362,9 @@
                   >
                   {{ form.pontos5_time1 }}
                 </div>
+                <div class="vencedor-column">
+                  <input type="checkbox" id="form.jogador5_time1" name="vencedor-jogador5-time1" style=""/>
+              </div>
               </div>
             </div>
           </div>
@@ -371,7 +389,7 @@
                 <div class="switch-container">
 				<label class="switch-label">Vencedor</label>
                 <label class="switch">
-                  <input type="checkbox" id="vencedor-time2" name="vencedor"/>
+                  <input type="checkbox" id="vencedor_time2" name="vencedor"/>
                   <span class="slider round"></span>
                 </label>
               </h3>
@@ -392,6 +410,9 @@
                   >
                   {{ form.pontos1_time2 }}
                 </div>
+                <div class="vencedor-column">
+                  <input type="checkbox" id="form.jogador1_time2" name="vencedor-jogador1-time2" />
+              </div>
               </div>
               <div class="form-row">
                 <div class="jogador-column">
@@ -410,6 +431,9 @@
                   >
                   {{ form.pontos2_time2 }}
                 </div>
+                <div class="vencedor-column">
+                  <input type="checkbox" id="form.jogador2_time2" name="vencedor-jogador2-time2" />
+              </div>
               </div>
               <div class="form-row">
                 <div class="jogador-column">
@@ -428,6 +452,9 @@
                   >
                   {{ form.pontos3_time2 }}
                 </div>
+                <div class="vencedor-column">
+                  <input type="checkbox" id="form.jogador3_time2" name="vencedor-jogador3-time2" />
+              </div>
               </div>
               <div class="form-row">
                 <div class="jogador-column">
@@ -446,6 +473,9 @@
                   >
                   {{ form.pontos4_time2 }}
                 </div>
+                <div class="vencedor-column">
+                  <input type="checkbox" id="form.jogador4_time2" name="vencedor-jogador4-time2" />
+              </div>
               </div>
               <div class="form-row">
                 <div class="jogador-column">
@@ -464,6 +494,9 @@
                   >
                   {{ form.pontos5_time2 }}
                 </div>
+                <div class="vencedor-column">
+                  <input type="checkbox" id="form.jogador5_time2" name="vencedor-jogador5-time2" />
+              </div>
               </div>
             </div>
           </div>
@@ -474,15 +507,15 @@
       </form>
     </div>
 	<script>
-		document.getElementById('vencedor-time1').addEventListener('change', function() {
+		document.getElementById('vencedor_time1').addEventListener('change', function() {
 			if (this.checked) {
-			document.getElementById('vencedor-time2').checked = false;
+			document.getElementById('vencedor_time2').checked = false;
 			}
 		});
 
-		document.getElementById('vencedor-time2').addEventListener('change', function() {
+		document.getElementById('vencedor_time2').addEventListener('change', function() {
 			if (this.checked) {
-			document.getElementById('vencedor-time1').checked = false;
+			document.getElementById('vencedor_time1').checked = false;
 			}
 		});
 	</script>

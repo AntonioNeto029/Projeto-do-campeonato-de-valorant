@@ -47,6 +47,18 @@ class Partida(models.Model):
     pontos4_time2 = models.IntegerField()
     pontos5_time2 = models.IntegerField()
     
+    # vencedor1_time1 = models.BooleanField()
+    # vencedor1_time1 = models.BooleanField()
+    # vencedor1_time1 = models.BooleanField()
+    # vencedor1_time1 = models.BooleanField()
+    # vencedor1_time1 = models.BooleanField()
+    
+    # vencedor2_time2 = models.BooleanField()
+    # vencedor2_time2 = models.BooleanField()
+    # vencedor2_time2 = models.BooleanField()
+    # vencedor2_time2 = models.BooleanField()
+    # vencedor2_time2 = models.BooleanField()
+    
     
     def __str__(self):
         return f"Partida em {self.mapa} em {self.data}"
